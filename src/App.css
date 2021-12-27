@@ -36,3 +36,115 @@
     transform: rotate(360deg);
   }
 }
+html {
+  height: 100%;
+}
+body {
+  display: flex;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(233, 225, 216);
+}
+.inputContainer {
+  background-color: aliceblue;
+  box-sizing: content-box;
+  flex: 1;
+  padding: 4em;
+  border: 1px solid rgb(38, 185, 226);
+  border-radius: 20px;
+}
+label {
+  display: block;
+  margin: 1em 0 1em 0;
+  text-align: center;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 30px 0 5px 5px;
+  border-radius: 10px;
+}
+
+input[type="text"] {
+  padding: 30px 0 20px 5px;
+}
+
+input[type="text"] {
+  min-width: 350px;
+}
+
+select,
+input[type="text"]:focus:valid {
+  border: 2px solid rgb(38, 185, 226);
+  outline: none;
+}
+
+select,
+input:valid {
+  border: 2px solid rgb(182, 209, 216);
+}
+
+button {
+  display: block;
+  padding: 1em;
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 0.5em;
+  background-color: #9eddee;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #7bcbe0;
+  box-shadow: rgb(233, 225, 216);
+}
+
+/* Card */
+
+.card-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: seashell;
+}
+
+.card {
+  padding: 4rem;
+  margin: 10px;
+  background-color: rgb(194, 188, 188);
+  font-size: 50px;
+}
+.card:hover {
+  background-color: rgb(85, 80, 80);
+}
+.card-failed {
+  background-color: rgb(241, 21, 21);
+  color: white;
+}
+.card-failed:hover {
+  background-color: rgb(241, 101, 101);
+  color: white;
+}
+
+.card-success {
+  background-color: rgb(21, 241, 50);
+  color: white;
+}
+.card-success:hover {
+  background-color: rgb(110, 250, 129);
+  color: white;
+}
+
+/* Exit-Game-Window */
+
+.exit-game-window {
+  text-align: center;
+  background-color: rgb(212, 226, 233);
+  width: 600px;
+  height: 150px;
+  padding: 3em;
+  border-radius: 15px;
+}
