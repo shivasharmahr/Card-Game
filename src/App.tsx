@@ -1,6 +1,6 @@
 import "./App.css";
 import Cards from "./components/Cards";
-import UserInput from "./components/UserInput";
+import UserInput from "./pages/UserInput";
 import ExitWindow from "./components/ExitWindow";
 import { useReducer } from "react";
 
@@ -18,7 +18,7 @@ function App() {
       case "GAME_COMMENT_LOST":
         return {
           ...state,
-          gameComment: `You lost the game, you can "Retry" with the same input ${action.payload} or choose another number by pressing "Exit"`,
+          gameComment: `You lost the game, you can "Retry" with the choosen number ${action.payload} or choose another number by pressing "Exit"`,
         };
     }
   };
