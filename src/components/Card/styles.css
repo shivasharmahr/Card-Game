@@ -1,0 +1,26 @@
+.card {
+  padding: 4rem;
+  margin: 10px;
+  background-color: rgb(194, 188, 188);
+  font-size: 50px;
+}
+.card:hover {
+  background-color: rgb(85, 80, 80);
+}
+.card-failed {
+  background-color: rgb(241, 21, 21);
+  color: white;
+}
+.card-failed:hover {
+  background-color: rgb(241, 101, 101);
+  color: white;
+}
+
+.card-success {
+  background-color: rgb(21, 241, 50);
+  color: white;
+}
+.card-success:hover {
+  background-color: rgb(110, 250, 129);
+  color: white;
+}

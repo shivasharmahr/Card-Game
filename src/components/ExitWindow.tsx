@@ -1,9 +1,11 @@
+import Button from "./Button";
+
 const ExitWindow = ({ displayUserInput, retry, gameComment }: any) => {
   return (
     <div className="exit-game-window">
       <p>{gameComment}</p>
-      <button onClick={retry}>RePlay</button>
-      <button onClick={displayUserInput}>Exit</button>
+      <Button onClick={retry}>Replay</Button>
+      <Button onClick={displayUserInput}>Exit</Button>
     </div>
   );
 };

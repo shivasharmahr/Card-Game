@@ -54,11 +54,6 @@ body {
   border: 1px solid rgb(38, 185, 226);
   border-radius: 20px;
 }
-label {
-  display: block;
-  margin: 1em 0 1em 0;
-  text-align: center;
-}
 
 input[type="text"],
 select {
@@ -76,29 +71,13 @@ input[type="text"] {
   min-width: 350px;
 }
 
-select,
 input[type="text"]:focus:valid {
   border: 2px solid rgb(38, 185, 226);
   outline: none;
 }
 
-select,
 input:valid {
   border: 2px solid rgb(182, 209, 216);
-}
-
-button {
-  display: block;
-  padding: 1em;
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 0.5em;
-  background-color: #9eddee;
-}
-button:hover {
-  cursor: pointer;
-  background-color: #7bcbe0;
-  box-shadow: rgb(233, 225, 216);
 }
 
 /* Card */
@@ -109,33 +88,6 @@ button:hover {
   align-items: center;
   flex-wrap: wrap;
   background-color: seashell;
-}
-
-.card {
-  padding: 4rem;
-  margin: 10px;
-  background-color: rgb(194, 188, 188);
-  font-size: 50px;
-}
-.card:hover {
-  background-color: rgb(85, 80, 80);
-}
-.card-failed {
-  background-color: rgb(241, 21, 21);
-  color: white;
-}
-.card-failed:hover {
-  background-color: rgb(241, 101, 101);
-  color: white;
-}
-
-.card-success {
-  background-color: rgb(21, 241, 50);
-  color: white;
-}
-.card-success:hover {
-  background-color: rgb(110, 250, 129);
-  color: white;
 }
 
 /* Exit-Game-Window */
