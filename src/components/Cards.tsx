@@ -4,14 +4,18 @@ import Card from "./Card";
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const shuffledArrayfunc = (array: any) => array.sort(() => Math.random() - 0.5);
 let shuffledArray = shuffledArrayfunc(array);
+let memArray = [-1];
+let i = 0;
 
 const Cards = ({ enteredNumber, changeCardStatus, optionValueArray }: any) => {
   // Card click event handler
   const handleClickCard = (e: any) => {
+    memArray[i] = e.target.id;
     dispatcherCards({
       type: "UPDATE_CLICKED_NUMBER",
       payload: shuffledArray[e.target.id - 1],
     });
+    i++;
   };
 
   /* createCards function - Returns the all cards inside div.card-holder, 
@@ -22,75 +26,31 @@ const Cards = ({ enteredNumber, changeCardStatus, optionValueArray }: any) => {
         * It will truns the card color to red and display the number.
   */
   const createCards = (isCorrectNumber = false, clickedCard = false): any => {
-    // let cardlist;
-
-    // if (!clickedCard) {
-    //   cardlist = shuffledArray.map((numbers: any, index: any) => {
-    //     return (
-    //       <Card
-    //         key={numbers}
-    //         className="card"
-    //         id={index + 1}
-    //         onClick={handleClickCard}
-    //       >
-    //         ?
-    //       </Card>
-    //     );
-    //   });
-    // } else {
-    //   cardlist = shuffledArray.map((numbers: any, index: any) => {
-    //     console.log(cards.clickedNumber);
-    //     return (
-    //       <div
-    //         key={numbers}
-    //         className={`${
-    //           cards.cardHolder.props.children[0][index].props.className
-    //         } ${
-    //           Number(cards.clickedNumber) === Number(numbers)
-    //             ? isCorrectNumber
-    //               ? "card-success"
-    //               : "card-failed"
-    //             : ""
-    //         }`}
-    //         id={index + 1}
-    //         onClick={handleClickCard}
-    //       >
-    //         {Number(cards.clickedNumber) === Number(numbers)
-    //           ? numbers
-    //           : cards.cardHolder.props.children[0][index].props.children}
-    //       </div>
-    //     );
-    //   });
-    // }
-
     return (
       <div className="card-holder">
         {shuffledArray.map((item: any, index: number) => (
           <Card
             key={item}
+            id={index + 1}
+            hiddenNum={item}
+            memArray={memArray}
             success={
               clickedCard &&
               Number(cards.clickedNumber) === Number(item) &&
               isCorrectNumber
             }
-            // className={`${
-            //   cards.cardHolder.props.children[0][index].props.className
-            // } ${
-            //   Number(cards.clickedNumber) === Number(item)
-            //     ? isCorrectNumber
-            //       ? "card-success"
-            //       : "card-failed"
-            //     : ""
-            // }`}
-            id={index + 1}
+            error={
+              clickedCard &&
+              Number(cards.clickedNumber) === Number(item) &&
+              !isCorrectNumber
+            }
             onClick={handleClickCard}
           >
             {clickedCard
               ? Number(cards.clickedNumber) === Number(item)
                 ? item
-                : ""
-              : // : cards.cardHolder.props.children[0][index].props.children
-                "?"}
+                : "?"
+              : "?"}
           </Card>
         ))}
       </div>
@@ -106,6 +66,8 @@ const Cards = ({ enteredNumber, changeCardStatus, optionValueArray }: any) => {
   Array is shuffled and kept ready
   */
   const trigerExitWindow = (gameStatus: any) => {
+    memArray = [];
+    i = 0;
     shuffledArray = shuffledArrayfunc(optionValueArray);
     changeCardStatus(false, true, gameStatus);
   };
@@ -171,7 +133,6 @@ const Cards = ({ enteredNumber, changeCardStatus, optionValueArray }: any) => {
           type: "WRONG_NUM_GUESSED",
           payload: createCards(false, true),
         });
-        // setCardHolder(() => createCards(false, true));
       }
     }
   }, [cards.clickedNumber]);

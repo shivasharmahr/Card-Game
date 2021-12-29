@@ -3,22 +3,44 @@ import Cards from "./components/Cards";
 import UserInput from "./pages/UserInput";
 import ExitWindow from "./components/ExitWindow";
 import { useReducer } from "react";
-import { initialState, reducer } from "./store";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const cardGameReducer = (state: any, action: any) => {
+    switch (action.type) {
+      case "INIT_ENTERED_NUM":
+        return { ...state, enteredNumber: action.payload };
+      case "UPDATE_CARDS_STATUS":
+        return { ...state, isCards: action.payload };
+      case "UPDATE_EXIT_WINDOW_STATUS":
+        return { ...state, isExitWindow: action.payload };
+      case "GAME_COMMENT_WIN":
+        return { ...state, gameComment: "Congrats, You guessed the right " };
+      case "GAME_COMMENT_LOST":
+        return {
+          ...state,
+          gameComment: `You lost the game, you can "Retry" with the choosen number ${action.payload} or choose another number by pressing "Exit"`,
+        };
+    }
+  };
+
+  const [cardGame, dispatcherCardGame] = useReducer(cardGameReducer, {
+    enteredNumber: 0,
+    isCards: false,
+    isExitWindow: false,
+    gameComment: "",
+  });
 
   const optionValueArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   // Call Back handler: When user clicks on play button
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_CARDS_STATUS",
       payload: true,
     });
     // setCards(true);
-    dispatch({
+    dispatcherCardGame({
       type: "INIT_ENTERED_NUM",
       payload: e.target[1].value,
     });
@@ -32,19 +54,19 @@ function App() {
     gameStatus: any
   ) => {
     gameStatus
-      ? dispatch({
+      ? dispatcherCardGame({
           type: "GAME_COMMENT_WIN",
         })
-      : dispatch({
+      : dispatcherCardGame({
           type: "GAME_COMMENT_LOST",
-          payload: state.enteredNumber,
+          payload: cardGame.enteredNumber,
         });
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_CARDS_STATUS",
       payload: cardValue,
     });
     // setCards(cardValue);
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_EXIT_WINDOW_STATUS",
       payload: exitWindowValue,
     });
@@ -53,11 +75,11 @@ function App() {
 
   // To make user input (First Page) to appear on the screen
   const displayUserInput = () => {
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_CARDS_STATUS",
       payload: false,
     });
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_EXIT_WINDOW_STATUS",
       payload: false,
     });
@@ -65,11 +87,11 @@ function App() {
 
   // When retry button is pressed new shuffled cards has to appear
   const retry = () => {
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_CARDS_STATUS",
       payload: true,
     });
-    dispatch({
+    dispatcherCardGame({
       type: "UPDATE_EXIT_WINDOW_STATUS",
       payload: false,
     });
@@ -77,24 +99,24 @@ function App() {
 
   return (
     <>
-      {!state.isCards && !state.isExitWindow && (
+      {!cardGame.isCards && !cardGame.isExitWindow && (
         <UserInput
           optionValueArray={optionValueArray}
           handleInput={handleSubmit}
         ></UserInput>
       )}
-      {state.isCards && (
+      {cardGame.isCards && (
         <Cards
           optionValueArray={optionValueArray}
-          enteredNumber={state.enteredNumber}
+          enteredNumber={cardGame.enteredNumber}
           changeCardStatus={changeCardStatus}
         ></Cards>
       )}
-      {state.isExitWindow && (
+      {cardGame.isExitWindow && (
         <ExitWindow
           displayUserInput={displayUserInput}
           retry={retry}
-          gameComment={state.gameComment}
+          gameComment={cardGame.gameComment}
         ></ExitWindow>
       )}
     </>
