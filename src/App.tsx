@@ -39,12 +39,10 @@ function App() {
       type: "UPDATE_CARDS_STATUS",
       payload: true,
     });
-    // setCards(true);
     dispatcherCardGame({
       type: "INIT_ENTERED_NUM",
       payload: e.target[1].value,
     });
-    // setEnteredNumber(e.target[1].value);
   };
 
   // To make cards appearance on the screen
@@ -65,12 +63,10 @@ function App() {
       type: "UPDATE_CARDS_STATUS",
       payload: cardValue,
     });
-    // setCards(cardValue);
     dispatcherCardGame({
       type: "UPDATE_EXIT_WINDOW_STATUS",
       payload: exitWindowValue,
     });
-    // setExitWindow(exitWindowValue);
   };
 
   // To make user input (First Page) to appear on the screen
