@@ -5,6 +5,7 @@ import ExitWindow from "./components/ExitWindow";
 import { useReducer } from "react";
 
 function App() {
+  console.log("App is rendering");
   const cardGameReducer = (state: any, action: any) => {
     switch (action.type) {
       case "INIT_ENTERED_NUM":
@@ -26,7 +27,7 @@ function App() {
   const [cardGame, dispatcherCardGame] = useReducer(cardGameReducer, {
     enteredNumber: 0,
     isCards: false,
-    isExitWindow: false,
+    isExitWindow: false,git
     gameComment: "",
   });
 
