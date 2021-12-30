@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../components/Button";
 
 const ExitWindow = ({ displayUserInput, retry, gameComment }: any) => {
   return (
