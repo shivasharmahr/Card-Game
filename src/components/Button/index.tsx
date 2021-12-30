@@ -1,6 +1,11 @@
+import { ChangeEvent, ReactChild } from "react";
 import "./styles.css";
-
-const Button = ({ children, onClick, ...otherProps }: any) => {
+type ButtonProp = {
+  children: ReactChild;
+  value?: string;
+  onClick?: any;
+};
+const Button = ({ children, onClick, ...otherProps }: ButtonProp) => {
   return (
     <button onClick={onClick} {...otherProps}>
       {children}

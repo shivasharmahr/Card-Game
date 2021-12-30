@@ -1,6 +1,14 @@
 import "./styles.css";
+import { ReactChild } from "react";
 
-const Card = ({ children, id, onClick, error, success }: any) => {
+type CardProp = {
+  children: ReactChild;
+  id: any;
+  onClick: any;
+  error: boolean;
+  success: boolean;
+};
+const Card = ({ children, id, onClick, error, success }: CardProp) => {
   return (
     <div
       id={id}

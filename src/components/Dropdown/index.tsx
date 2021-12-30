@@ -1,6 +1,11 @@
 import "./styles.css";
 
-const Dropdown = ({ label, options, placeholder }: any) => {
+type DropdownProp = {
+  label: string;
+  options: number[];
+  placeholder: string;
+};
+const Dropdown = ({ label, options, placeholder }: DropdownProp) => {
   return (
     <div>
       <label>{label}</label>

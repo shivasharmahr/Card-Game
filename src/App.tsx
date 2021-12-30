@@ -1,8 +1,8 @@
-import "./App.css";
-import Cards from "./components/Cards";
-import UserInput from "./pages/UserInput";
-import ExitWindow from "./components/ExitWindow";
 import { useReducer } from "react";
+import "./App.css";
+import Cards from "./pages/Cards";
+import ExitWindow from "./pages/ExitWindow";
+import UserInput from "./pages/UserInput";
 import { initialState, reducer } from "./store";
 
 function App() {
@@ -22,15 +22,15 @@ function App() {
     });
     dispatcherCardGame({
       type: "INIT_ENTERED_NUM",
-      payload: e.target[1].value,
+      payload: Number(e.target[1].value),
     });
   };
 
   // To make cards appearance on the screen
   const changeCardStatus = (
-    cardValue: any,
-    exitWindowValue: any,
-    gameStatus: any
+    cardValue: boolean,
+    exitWindowValue: boolean,
+    gameStatus: boolean
   ) => {
     gameStatus
       ? dispatcherCardGame({
