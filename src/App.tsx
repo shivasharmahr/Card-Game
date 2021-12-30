@@ -3,32 +3,15 @@ import Cards from "./components/Cards";
 import UserInput from "./pages/UserInput";
 import ExitWindow from "./components/ExitWindow";
 import { useReducer } from "react";
+import { initialState, reducer } from "./store";
 
 function App() {
-  const cardGameReducer = (state: any, action: any) => {
-    switch (action.type) {
-      case "INIT_ENTERED_NUM":
-        return { ...state, enteredNumber: action.payload };
-      case "UPDATE_CARDS_STATUS":
-        return { ...state, isCards: action.payload };
-      case "UPDATE_EXIT_WINDOW_STATUS":
-        return { ...state, isExitWindow: action.payload };
-      case "GAME_COMMENT_WIN":
-        return { ...state, gameComment: "Congrats, You guessed the right " };
-      case "GAME_COMMENT_LOST":
-        return {
-          ...state,
-          gameComment: `You lost the game, you can "Retry" with the choosen number ${action.payload} or choose another number by pressing "Exit"`,
-        };
-    }
-  };
+  const cardGameReducer = reducer;
 
-  const [cardGame, dispatcherCardGame] = useReducer(cardGameReducer, {
-    enteredNumber: 0,
-    isCards: false,
-    isExitWindow: false,
-    gameComment: "",
-  });
+  const [cardGame, dispatcherCardGame] = useReducer(
+    cardGameReducer,
+    initialState
+  );
 
   // Call Back handler: When user clicks on play button
   const handleSubmit = (e: any) => {
