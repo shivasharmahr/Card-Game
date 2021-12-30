@@ -30,8 +30,6 @@ function App() {
     gameComment: "",
   });
 
-  const optionValueArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
   // Call Back handler: When user clicks on play button
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -93,30 +91,36 @@ function App() {
     });
   };
 
-  return (
-    <>
-      {!cardGame.isCards && !cardGame.isExitWindow && (
-        <UserInput
-          optionValueArray={optionValueArray}
-          handleInput={handleSubmit}
-        ></UserInput>
-      )}
-      {cardGame.isCards && (
-        <Cards
-          optionValueArray={optionValueArray}
-          enteredNumber={cardGame.enteredNumber}
-          changeCardStatus={changeCardStatus}
-        ></Cards>
-      )}
-      {cardGame.isExitWindow && (
-        <ExitWindow
-          displayUserInput={displayUserInput}
-          retry={retry}
-          gameComment={cardGame.gameComment}
-        ></ExitWindow>
-      )}
-    </>
-  );
+  const getActivePage = () => {
+    if (!cardGame.isCards && !cardGame.isExitWindow) {
+      return "start";
+    } else if (cardGame.isCards) {
+      return "game";
+    } else if (cardGame.isExitWindow) {
+      return "exit";
+    }
+  };
+
+  const activePage: any = getActivePage();
+
+  const pages: any = {
+    start: <UserInput handleInput={handleSubmit} />,
+    game: (
+      <Cards
+        enteredNumber={cardGame.enteredNumber}
+        changeCardStatus={changeCardStatus}
+      />
+    ),
+    exit: (
+      <ExitWindow
+        displayUserInput={displayUserInput}
+        retry={retry}
+        gameComment={cardGame.gameComment}
+      />
+    ),
+  };
+
+  return pages[activePage] ?? null;
 }
 
 export default App;
