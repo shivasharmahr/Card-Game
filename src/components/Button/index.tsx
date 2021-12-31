@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactChild } from "react";
+import { ReactChild } from "react";
 import "./styles.css";
 type ButtonProp = {
   children: ReactChild;

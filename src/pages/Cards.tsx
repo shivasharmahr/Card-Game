@@ -13,9 +13,13 @@ type CardsProps = {
     gameStatus: boolean
   ) => void;
 };
+
 const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
+  console.log("rendering cards");
+  console.log(shuffledArray);
   const [openedCardsIndices, setOpenedCardsIndices] = useState<any>([]);
   console.log(openedCardsIndices);
+
   /* 
   trigerExitWindow()
   Number is matchs or 3 attempts are done. Card should not be displayed,
@@ -24,34 +28,35 @@ const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
   
   Array is shuffled and kept ready
   */
-  const trigerExitWindow = (gameStatus: boolean) => {
+
+  const hadleOnclick = (e: ChangeEvent<HTMLImageElement>) => {
+    console.log("hadle on click");
+    if (!openedCardsIndices.includes(e.target.id)) {
+      setOpenedCardsIndices([...openedCardsIndices, Number(e.target.id)]);
+    }
+  };
+
+  const trigerExitWindow = (gameStatus: boolean) =>
     setTimeout(() => {
       changeCardStatus(false, true, gameStatus);
       shuffledArray = shuffledArrayfunc([...optionValueArray]);
     }, 500);
-  };
 
+  if (openedCardsIndices.length > 2) {
+    console.log("inside attepts failed");
+    trigerExitWindow(false);
+  }
   return (
     <div className="card-holder">
       {shuffledArray.map((item: number, index: number) => {
-        const isIndexIncluded = openedCardsIndices.includes(index.toString());
+        const isIndexIncluded = openedCardsIndices.includes(index);
         const isSuccess = isIndexIncluded && item === enteredNumber;
 
-        const hadleOnclick = (e: ChangeEvent<HTMLImageElement>) => {
-          let newIndices: any = [...openedCardsIndices];
-          if (!newIndices.includes(e.target.id)) {
-            newIndices = [...openedCardsIndices, e.target.id];
-            setOpenedCardsIndices(newIndices);
-            console.log("open", openedCardsIndices);
-            console.log("open", openedCardsIndices);
-          }
-
-          if (newIndices.includes(index.toString()) && item === enteredNumber) {
-            trigerExitWindow(true);
-          } else if (newIndices.length > 2) {
-            trigerExitWindow(false);
-          }
-        };
+        console.log("rendering card ");
+        if (isSuccess) {
+          console.log("inside success");
+          trigerExitWindow(true);
+        }
 
         return (
           <Card
@@ -59,7 +64,7 @@ const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
             id={index}
             error={isIndexIncluded}
             success={isSuccess}
-            onClick={hadleOnclick}
+            onClick={(e: ChangeEvent<HTMLImageElement>) => hadleOnclick(e)}
           >
             {isIndexIncluded ? item : "?"}
           </Card>
