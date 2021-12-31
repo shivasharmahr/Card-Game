@@ -15,10 +15,7 @@ type CardsProps = {
 };
 
 const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
-  console.log("rendering cards");
-  console.log(shuffledArray);
   const [openedCardsIndices, setOpenedCardsIndices] = useState<any>([]);
-  console.log(openedCardsIndices);
 
   /* 
   trigerExitWindow()
@@ -30,7 +27,6 @@ const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
   */
 
   const hadleOnclick = (e: ChangeEvent<HTMLImageElement>) => {
-    console.log("hadle on click");
     if (!openedCardsIndices.includes(e.target.id)) {
       setOpenedCardsIndices([...openedCardsIndices, Number(e.target.id)]);
     }
@@ -43,7 +39,6 @@ const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
     }, 500);
 
   if (openedCardsIndices.length > 2) {
-    console.log("inside attepts failed");
     trigerExitWindow(false);
   }
   return (
@@ -52,9 +47,7 @@ const Cards = ({ enteredNumber, changeCardStatus }: CardsProps) => {
         const isIndexIncluded = openedCardsIndices.includes(index);
         const isSuccess = isIndexIncluded && item === enteredNumber;
 
-        console.log("rendering card ");
         if (isSuccess) {
-          console.log("inside success");
           trigerExitWindow(true);
         }
 
