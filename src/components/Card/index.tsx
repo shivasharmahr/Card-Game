@@ -7,7 +7,6 @@ type CardProp = {
   shuffledArray: any;
   children?: any;
   clickedCardIndices: any;
-  shuffledArrayfunc: any;
   changeCardStatus: any;
 };
 
@@ -23,17 +22,14 @@ const Card = ({
   const [isGuessedWrong, setIsGuessedWrong] = useState(false);
   const [ClickedNum, setClickedNum] = useState();
 
-  console.log("Card Rendering ");
-
   /* 
   trigerExitWindow()
-  Number is matchs or 3 attempts are done. Card should not be displayed,
+  Number matchs or 3 attempts are done. Card should not be displayed,
   Exit window should be displayed sending.
   So,(cardValue = false, exitWindowValue = true)
   */
   const trigerExitWindow = (gameStatus: boolean) =>
     setTimeout(() => {
-      console.log("inside exit window");
       clickedCardIndices.current = 1;
       changeCardStatus(false, true, gameStatus);
     }, 500);

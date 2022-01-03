@@ -26,7 +26,7 @@ const UserInput = ({ handleInput }: any) => {
         placeholder={
           isInputError
             ? "You have to enter your name to continue"
-            : "Please select the number"
+            : "Please enter your name"
         }
         autoFocus={true}
       />
